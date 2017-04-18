@@ -3,7 +3,8 @@
     "amd": true,
     "es6": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "react": true
   },
   "plugins": [
   ],

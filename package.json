@@ -11,13 +11,22 @@
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
-    "jest": "^19.0.2"
+    "jest": "^19.0.2",
+    "react": "^15.5.4",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.4"
   },
   "dependencies": {},
   "license": "ISC",
   "directories": {
     "test": "test"
+  },
+  "peerDependencies": {
+    "react": "^15.5.4"
   }
 }
