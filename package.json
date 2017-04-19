@@ -6,11 +6,13 @@
     "start": "babel-node src/index.js",
     "test": "jest src",
     "lint": "eslint .",
-    "build": "babel src -d lib",
+    "build": "babel src -d --out-dir lib --ignore '**/*.test.js'",
     "prepublish": "npm run build"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
     "babel-cli": "^6.9.0",
+    "babel-core": "^6.24.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -29,9 +31,7 @@
   },
   "dependencies": {},
   "license": "ISC",
-  "directories": {
-    "test": "test"
-  },
+  "directories": {},
   "peerDependencies": {
     "react": "^15.5.4"
   }
