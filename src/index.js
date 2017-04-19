@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { getMatches } from './parser'
 
+const DefaultOuterComponent = (props) =>
+  <div>{props.children}</div>
+
 const SmartText = (props) => {
   const {
     component: Component,
@@ -30,11 +33,11 @@ SmartText.propTypes = {
   regex: PropTypes.instanceOf(RegExp),
   outerComponent: PropTypes.func.isRequired,
   component: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.string.isRequired,
 }
 
 SmartText.defaultProps = {
-  outerComponent: () => <div />,
+  outerComponent: DefaultOuterComponent,
 }
 
 export default SmartText
