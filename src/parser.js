@@ -2,6 +2,7 @@ export function getMatches(string, regex) {
   const parts = []
   let match
   let endOfLastMatch = 0
+  regex.lastIndex = 0
   do {
     match = regex.exec(string)
     if (match) {
