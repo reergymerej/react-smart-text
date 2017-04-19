@@ -1,11 +1,10 @@
 # react-smart-text
 
-Replace meaningful strings in text with components.
+Replace meaningful substrings with components.
 
 [![Build Status](https://travis-ci.org/reergymerej/react-smart-text.svg?branch=master)](https://travis-ci.org/reergymerej/react-smart-text)
 
 
-## Usage
 This is a complete example of replacing email addresses with mailto anchors.
 
 ```js
@@ -32,14 +31,25 @@ export default App
 <img width="520" alt="screenshot" src="https://cloud.githubusercontent.com/assets/1720010/25159597/680340e4-2476-11e7-90fd-c54fe07494ba.png">
 
 
-* Wrap a string in the component.
-* props:
-** regex - to find in string
-** component - to replace matches
-** outerComponent - single component to wrap everything in, defaults to a plain
-div
+## Usage
 
-Components will be passed the prop "match" so you can do what you want with it.
+Render a plain string within `<SmartText />` and substrings matching a pattern
+will be replaced by a custom component.
+
+### Props
+
+**regex** - Provide a regular expression describing the substring(s) you wish to
+replace.
+
+**component** - The component regex matches will be replaced with. Instances will be passed the props **result** (RegExp.exec result) and **text** to allow for additional logic.
+
+**outerComponent (optional)** - The outer component all other nodes will be
+contained within.  Thid defaults to a plain `<div />`.
+
+
+## Installation
+
+`yarn add react-smart-text`
 
 
 ## Test

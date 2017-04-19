@@ -1,6 +1,18 @@
 {
-  "version": "1.0.0",
+  "version": "0.0.1",
   "name": "react-smart-text",
+  "description": "Replace meaningful substrings with React components.",
+  "keywords": [
+    "react",
+    "text replacement",
+    "string replacement",
+    "text",
+    "string",
+    "replace",
+    "substitute",
+    "component",
+    "substring"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "start": "babel-node src/index.js",
@@ -34,5 +46,14 @@
   "directories": {},
   "peerDependencies": {
     "react": "^15.5.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reergymerej/react-smart-text.git"
+  },
+  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/reergymerej/react-smart-text/issues"
+  },
+  "homepage": "https://github.com/reergymerej/react-smart-text#readme"
 }
