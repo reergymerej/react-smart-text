@@ -7,21 +7,40 @@ const DefaultOuterComponent = (props) =>
 
 const SmartText = (props) => {
   const {
-    component: Component,
+    component,
     outerComponent: OuterComponent,
+    replacements,
+    regex,
+    children,
   } = props
-  const matches = getMatches(props.children, props.regex)
+  // handle alternate props
+  if (!replacements.length && regex && component) {
+    replacements.push({
+      regex,
+      component,
+    })
+  }
+  const regularExpressions = replacements.map(r => r.regex)
+  // There's nothing to replace.
+  if (!regularExpressions.length) {
+    return <OuterComponent>{children}</OuterComponent>
+  }
+  const matches = getMatches(children, regularExpressions)
   return (
     <OuterComponent>
       { matches.map((node, i) => {
         if (typeof node === 'string') {
           return node
         }
+        const replacementIndex = replacements.findIndex(replacement => {
+          return replacement.regex === node.regex
+        })
+        const ComponentForMatch = replacements[replacementIndex].component
         return (
-          <Component
+          <ComponentForMatch
             key={i}
-            result={node}
-            text={node[0]}
+            result={node.execResult}
+            text={node.execResult[0]}
           />
         )
       })}
@@ -30,14 +49,20 @@ const SmartText = (props) => {
 }
 
 SmartText.propTypes = {
-  regex: PropTypes.instanceOf(RegExp),
   outerComponent: PropTypes.func.isRequired,
-  component: PropTypes.func.isRequired,
+  regex: PropTypes.instanceOf(RegExp), // required if not using "replacements"
+  component: PropTypes.func,  // required if not using "replacements"
+  replacements: PropTypes.arrayOf(PropTypes.shape({
+    regex: PropTypes.instanceOf(RegExp).isRequired,
+    component: PropTypes.func,
+  })).isRequired,
+
   children: PropTypes.string.isRequired,
 }
 
 SmartText.defaultProps = {
   outerComponent: DefaultOuterComponent,
+  replacements: [],
 }
 
 export default SmartText
