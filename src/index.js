@@ -13,6 +13,7 @@ const SmartText = (props) => {
     regex,
     children,
   } = props
+  // handle alternate props
   if (!replacements.length && regex && component) {
     replacements.push({
       regex,
@@ -20,6 +21,10 @@ const SmartText = (props) => {
     })
   }
   const regularExpressions = replacements.map(r => r.regex)
+  // There's nothing to replace.
+  if (!regularExpressions.length) {
+    return <OuterComponent>{children}</OuterComponent>
+  }
   const matches = getMatches(children, regularExpressions)
   return (
     <OuterComponent>

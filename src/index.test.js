@@ -5,7 +5,6 @@ import SmartText from './index'
 const Foo = (props) => {
   const { result, text } = props
   // TODO: Do cool stuff based on the RegExp.exec result.
-  // console.log({ result })
   return (
     <div className="foo">
       {text}
@@ -22,6 +21,10 @@ const Bar = (props) => (
 const Star = () => <span>*</span>
 
 describe('react-smart-text', () => {
+  it('should not explode if we skip the props', () => {
+    shallow(<SmartText />)
+  })
+
   it('should use an outerComponent', () => {
     const regex = /(banana|tomato)/g
     const text = 'apple banana pear tomato blueberry'
@@ -85,8 +88,6 @@ describe('react-smart-text', () => {
     expect(foo.prop('text')).toEqual(match[0])
   })
 
-  it('should not explode if we skip the props')
-
   describe('replacements', () => {
     it('should work for a single replacement', () => {
       const regex = /[aeiou]/g
@@ -104,6 +105,31 @@ describe('react-smart-text', () => {
         </SmartText>
       )
       expect(wrapper.html()).toBe('<div>Th<span>*</span> q<span>*</span><span>*</span>ck br<span>*</span>wn f<span>*</span>x j<span>*</span>mps <span>*</span>v<span>*</span>r th<span>*</span> l<span>*</span>zy d<span>*</span>g.</div>')
+    })
+
+    it('should work for multiple repacements', () => {
+      const A = () => <div />
+      const E = () => <span />
+      const a = /a/g
+      const e = /e/g
+      const text = 'The quick brown fox jumps over the lazy dog.'
+      const wrapper = shallow(
+        <SmartText
+          replacements={[
+            {
+              regex: a,
+              component: A,
+            },
+            {
+              regex: e,
+              component: E,
+            },
+          ]}
+        >
+          {text}
+        </SmartText>
+      )
+      expect(wrapper.html()).toBe('<div>Th<span></span> quick brown fox jumps ov<span></span>r th<span></span> l<div></div>zy dog.</div>')
     })
   })
 })
