@@ -30,23 +30,22 @@
     "eslint": "^3.19.0",
     "jest": "^19.0.2",
     "react": "^15.5.4",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4"
   },
-  "dependencies": {
-    "react-addons-test-utils": "^15.5.1"
-  },
+  "dependencies": {},
   "license": "ISC",
   "directories": {},
   "peerDependencies": {
     "react": "^15.5.4"
   },
+  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reergymerej/react-smart-text.git"
+    "url": "git+https://github.com/understory-dev/react-smart-text.git"
   },
-  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com>",
   "bugs": {
-    "url": "https://github.com/reergymerej/react-smart-text/issues"
+    "url": "https://github.com/understory-dev/react-smart-text/issues"
   },
-  "homepage": "https://github.com/reergymerej/react-smart-text#readme"
+  "homepage": "https://github.com/understory-dev/react-smart-text#readme"
 }

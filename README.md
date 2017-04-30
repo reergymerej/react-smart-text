@@ -2,8 +2,7 @@
 
 Replace meaningful substrings with components.
 
-[![Build Status](https://travis-ci.org/reergymerej/react-smart-text.svg?branch=master)](https://travis-ci.org/reergymerej/react-smart-text)
-
+[![Build Status](https://travis-ci.org/understory-dev/react-smart-text.svg?branch=master)](https://travis-ci.org/understory-dev/react-smart-text)
 
 This is a complete example of replacing email addresses with mailto anchors.
 
