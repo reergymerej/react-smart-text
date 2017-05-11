@@ -11,7 +11,7 @@ const SmartText = (props) => {
     outerComponent: OuterComponent,
     replacements,
     regex,
-    children,
+    children = '',
   } = props
   // handle alternate props
   if (!replacements.length && regex && component) {

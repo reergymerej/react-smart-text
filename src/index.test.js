@@ -25,6 +25,14 @@ describe('react-smart-text', () => {
     shallow(<SmartText />)
   })
 
+  it('should not die if we pass `undefined` children', () => {
+    shallow(
+      <SmartText
+        replacements={[ { regex: /foo/g, component: Foo } ]}
+      >{undefined}</SmartText>
+    )
+  })
+
   it('should use an outerComponent', () => {
     const regex = /(banana|tomato)/g
     const text = 'apple banana pear tomato blueberry'
