@@ -7,17 +7,20 @@ const DefaultOuterComponent = (props) =>
 
 const SmartText = (props) => {
   const {
-    component,
-    outerComponent: OuterComponent,
-    replacements,
-    regex,
     children,
+    component,
+    customProps,
+    outerComponent: OuterComponent,
+    regex,
+    replacements,
   } = props
+  console.log('regex', regex)
   // handle alternate props
   if (!replacements.length && regex && component) {
     replacements.push({
-      regex,
       component,
+      customProps,
+      regex,
     })
   }
   const regularExpressions = replacements.map(r => r.regex)
@@ -26,6 +29,9 @@ const SmartText = (props) => {
     return <OuterComponent>{children}</OuterComponent>
   }
   const matches = getMatches(children, regularExpressions)
+  if (props.customProps) {
+    console.log('matches:', matches)
+  }
   return (
     <OuterComponent>
       { matches.map((node, i) => {
@@ -35,12 +41,16 @@ const SmartText = (props) => {
         const replacementIndex = replacements.findIndex(replacement => {
           return replacement.regex === node.regex
         })
-        const ComponentForMatch = replacements[replacementIndex].component
+
+        const option = replacements[replacementIndex]
+        const ComponentForMatch = option.component
+        const { customProps } = option
         return (
           <ComponentForMatch
             key={i}
             result={node.execResult}
             text={node.execResult[0]}
+            {...customProps}
           />
         )
       })}

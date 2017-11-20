@@ -2,6 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import SmartText from './index'
 
+// TODO: mock getMatches
+
 const Foo = (props) => {
   const { result, text } = props
   // TODO: Do cool stuff based on the RegExp.exec result.
@@ -40,6 +42,28 @@ describe('react-smart-text', () => {
     expect(wrapper.is('Bar')).toBe(true)
   })
 
+  it('should pass props to the component', () => {
+    const regex = /horse/g
+    const text = 'pig horse cow'
+    const onWhatever = jest.fn()
+    const Horse = () => <div />
+    const wrapper = shallow(
+      <SmartText
+        regex={regex}
+        component={Horse}
+        customProps={{
+          onWhatever,
+        }}
+      >
+        {text}
+      </SmartText>
+    )
+    const foo = wrapper.find(Horse).at(0)
+    console.log('debug', wrapper.debug())
+    foo.simulate('whatever')
+    expect(onWhatever).toHaveBeenCalled()
+  })
+
   it('should replace text matches with a component', () => {
     const regex = /(banana|tomato)/g
     const text = 'apple banana pear tomato blueberry'
@@ -70,6 +94,7 @@ describe('react-smart-text', () => {
     const match = regex.exec(text)
     expect(foo.prop('result')).toEqual(match)
   })
+
 
   it('should pass the text to the component', () => {
     const regex = /(banana|tomato)/g
@@ -132,4 +157,5 @@ describe('react-smart-text', () => {
       expect(wrapper.html()).toBe('<div>Th<span></span> quick brown fox jumps ov<span></span>r th<span></span> l<div></div>zy dog.</div>')
     })
   })
+
 })
