@@ -40,7 +40,11 @@ will be replaced by a custom component.
 **regex** - Provide a regular expression describing the substring(s) you wish to
 replace.
 
-**component** - The component regex matches will be replaced with. Instances will be passed the props **result** (RegExp.exec result) and **text** to allow for additional logic.
+**component** - The component regex matches will be replaced with. Instances will be passed the props
+
+* **result** - RegExp.exec result
+* **text** - the plain text of the match
+* extra props you need passed down (like event handlers), see "componentProps"
 
 **outerComponent (optional)** - The outer component all other nodes will be
 contained within.  Thid defaults to a plain `<div />`.
@@ -51,7 +55,37 @@ contained within.  Thid defaults to a plain `<div />`.
 `yarn add react-smart-text`
 
 
-## Multiple Replacement Types
+## Examples
+
+### Using componentProps
+
+```js
+const barRegex = (/bar/g)
+const Bar = (props) => (
+  <div onClick={props.onClick}>
+    {props.text}
+  </div>
+)
+
+class Demo extends React.Component {
+  handleBarClick = () => {
+    console.log('Bar was clicked')
+  }
+
+  render () {
+    const barProps = {
+      onClick: this.handleBarClick,
+    }
+    return (
+      <SmartText regex={barRegex} component={Bar} componentProps={barProps}>
+        foo bar baz
+      </SmartText>
+    )
+  }
+}
+```
+
+### Multiple Replacement Types
 
 If you want to replace multiple types of strings, provide an array of
 replacments.

@@ -139,5 +139,32 @@ describe('react-smart-text', () => {
       )
       expect(wrapper.html()).toBe('<div>Th<span></span> quick brown fox jumps ov<span></span>r th<span></span> l<div></div>zy dog.</div>')
     })
+
+    it('should add callbacks to replacements', () => {
+    })
+  })
+
+  describe('componentProps', () => {
+    it('should be added to each replacement', () => {
+      const spy = jest.fn()
+      const componentRegex = (/bar/g)
+      const Bar = () => (<div />)
+      const barProps = {
+        onClick: spy,
+        onBoop: () => {},
+      }
+      const wrapper = shallow(
+        <SmartText regex={componentRegex} component={Bar} componentProps={barProps}>
+          foo bar baz
+        </SmartText>
+      )
+      const comp = wrapper.find(Bar)
+      // use instead of `simulate` to ensure we're grabbing what is actually
+      // there
+      const onClick = comp.prop('onClick')
+      comp.prop('onClick')()
+      expect(spy).toHaveBeenCalled()
+      expect(typeof comp.prop('onBoop')).toBe('function')
+    })
   })
 })
