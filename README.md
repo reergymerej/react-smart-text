@@ -85,6 +85,8 @@ class Demo extends React.Component {
 }
 ```
 
+You can also include `componentProps` when using multiple replacements.
+
 ### Multiple Replacement Types
 
 If you want to replace multiple types of strings, provide an array of
@@ -110,6 +112,9 @@ const replacements = [
   {
     regex: vowelRegex,
     component: Vowel,
+    componentProps: {
+      onClick: () => console.log('AEIOU'),
+    },
   },
 ]
 

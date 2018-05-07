@@ -166,5 +166,28 @@ describe('react-smart-text', () => {
       expect(spy).toHaveBeenCalled()
       expect(typeof comp.prop('onBoop')).toBe('function')
     })
+
+    it('should work with multiple replacments', () => {
+      const replacements = [
+        {
+          regex: (/foo/g),
+          component: Foo,
+        },
+        {
+          regex: (/bar/g),
+          component: Bar,
+          componentProps: {
+            onClick: () => {},
+          },
+        },
+      ]
+      const wrapper = shallow(
+        <SmartText replacements={replacements}>
+          foo bar baz
+        </SmartText>
+      )
+      expect(typeof wrapper.find('Foo').prop('onClick')).toBe('undefined')
+      expect(typeof wrapper.find('Bar').prop('onClick')).toBe('function')
+    })
   })
 })

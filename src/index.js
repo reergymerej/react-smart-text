@@ -11,6 +11,7 @@ const SmartText = (props) => {
     outerComponent: OuterComponent,
     regex,
     children = '',
+    componentProps,
   } = props
   // handle alternate props
   const replacements = [...props.replacements]
@@ -18,6 +19,7 @@ const SmartText = (props) => {
     replacements.push({
       regex,
       component,
+      componentProps,
     })
   }
   const regularExpressions = replacements.map(r => r.regex)
@@ -36,10 +38,11 @@ const SmartText = (props) => {
           return replacement.regex === node.regex
         })
         const ComponentForMatch = replacements[replacementIndex].component
+        const componentPropsForMatch = replacements[replacementIndex].componentProps
         return (
           <ComponentForMatch
             key={i}
-            {...props.componentProps}
+            {...componentPropsForMatch}
             result={node.execResult}
             text={node.execResult[0]}
           />
@@ -57,6 +60,7 @@ SmartText.propTypes = {
   replacements: PropTypes.arrayOf(PropTypes.shape({
     regex: PropTypes.instanceOf(RegExp).isRequired,
     component: PropTypes.func,
+    componentProps: PropTypes.object,
   })).isRequired,
 
   children: PropTypes.string.isRequired,
